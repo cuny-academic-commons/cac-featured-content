@@ -3,7 +3,7 @@ Contributors: michael@castironcoding.com
 Tags: mu, featured, feature, feature content, wordpres mu, buddy press, buddypress
 Requires at least: 2.9
 Tested up to: 3.0.1
-Stable tag: 1.0
+Stable tag: 0.8
 
 The CAC Featured Content plugin provides a widget that allows you to select among five different content "types" to feature in a widget area. 
 
