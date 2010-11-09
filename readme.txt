@@ -1,6 +1,6 @@
 === CAC Featured Content ===
 Contributors: michael@castironcoding.com
-Tags: mu, featured, feature, feature content, wordpres mu, buddy press, buddypress
+Tags: buddypress, feature, featured, multisite, highlight
 Requires at least: 2.9
 Tested up to: 3.0.1
 Stable tag: 0.8
@@ -8,12 +8,17 @@ Stable tag: 0.8
 The CAC Featured Content plugin provides a widget that allows you to select among five different content "types" to feature in a widget area. 
 
 == Description ==
+The CAC Featured Content plugin was developed for the CUNY Academic Commons ( http://commons.gc.cuny.edu ) — an academic social network powered by WordPress, BuddyPress, and MediaWiki. It is assumed that the plugin will be installed alongside BuddyPress, although it could easily be modified to run without BuddyPress content.
 
-The CAC Featured Content plugin was developed for City University of New York's Academic Commons — an online community powered by WordPress MU and Buddy Press. It is assumed that the plugin will be installed alongside Buddy Press, although it could easily be modified to run without Buddy Press content. The widget provides the user with several useful tools for tailoring the content to work within many different themes. For example, the widget editor has the ability to specify a length (in characters) that will be used to crop text content. Whenever possible, the widget attempts to find an image to use along with a set of featured content. For groups the image is the group's avatar, for members the individual's avatar is used, for the blog the author's avatar is used, for posts the image used is either the first image within the post or the post author's avatar. The resource type allows the user to specify an image from an external source or to use the media browser, built in to the widget (much of the code used to implement this feature comes from Image Widget, by Shane & Peterm, Inc.). The incorporation of additional methods for including images are planned for future releases. 
+The widget provides the user with several useful tools for using a widget to feature content, such as Featured Blog Posts, Featured Members, Featured Resources, and Featured Blogs from a WordPress installation. The widget can be customized to work with many different themes; for example, the widget editor has the ability to specify a length (in characters) that will be used to crop text content.
+
+Whenever possible, the widget attempts to find an image to use along with a set of featured content. For groups, the image is the group’s avatar; for members the individual’s avatar is used; for the blog the author’s avatar is used; and for posts the image used is either the first image within the post or the avatar of the post author. The resource type allows the user to specify an image from an external source or to use the media browser, built in to the widget (much of the code used to implement this feature comes from Image Widget, by Shane & Peterm, Inc.). The incorporation of additional methods for including images are planned for future releases.
 
 Image cropping is possible by way of the excellent TimThumb: http://code.google.com/p/timthumb/
 
-Text cropping comes by way of the TYPO3 project: http://typo3.org/ 
+Text cropping comes by way of the TYPO3 project: http://typo3.org/
+
+Author: michael@castironcoding.com, cuny-academic-commons
 
 == Installation ==
 
