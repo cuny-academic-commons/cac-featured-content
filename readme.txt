@@ -3,7 +3,7 @@ Contributors: michael@castironcoding.com
 Tags: buddypress, feature, featured, multisite, highlight
 Requires at least: 2.9
 Tested up to: 3.0.1
-Stable tag: 0.8
+Stable tag: 0.8.1
 
 The CAC Featured Content plugin provides a widget that allows you to select among five different content "types" to feature in a widget area. 
 
