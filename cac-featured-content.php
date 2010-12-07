@@ -251,25 +251,24 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 	 * @author Shane & Peter, Inc. (Peter Chester)
 	 */
 	function cac_featured_image_send_to_editor( $html, $id, $caption, $title, $align, $url, $size='thumbnail', $alt = '' ) {
-		// Normally, media uploader return an HTML string (in this case, typically a complete image tag surrounded by a caption).
-		// Don't change that; instead, send custom javascript variables back to opener.
-		// Check that this is for the widget. Shouldn't hurt anything if it runs, but let's do it needlessly.
-		$size = 'thumbnail';
-		preg_match_all('/<img[^>]+>/i',$html, $result);
-		
-		// We really just assume one image
-		foreach($result as $img_tag) {
-			
-			preg_match_all('/(alt|title|src)=("[^"]*")/i',$img_tag[0], $result);
-			
-		}
-		$img_src = $result[0][0];
-		$img_path = $this->get_fully_qualified_image_path($img_src);
-		// Unlike Shane & Peter, we use timthumb to crop the image sent back by the uploader so that it fits within the dimensions of the widget editor. 
-		$html = '<img src="'.get_bloginfo('wpurl').'/wp-content/plugins/cac-featured-content/timthumb.php?src='.$img_path.' &h=50&w=50&q=100&a=l" class="avatar" width="50" hight="50"/>';
-		
-		
 		if ( $this->is_sp_widget_context() ) {
+			// Normally, media uploader return an HTML string (in this case, typically a complete image tag surrounded by a caption).
+			// Don't change that; instead, send custom javascript variables back to opener.
+			// Check that this is for the widget. Shouldn't hurt anything if it runs, but let's do it needlessly.
+			$size = 'thumbnail';
+			preg_match_all('/<img[^>]+>/i',$html, $result);
+
+			// We really just assume one image
+			foreach($result as $img_tag) {
+
+				preg_match_all('/(alt|title|src)=("[^"]*")/i',$img_tag[0], $result);
+
+			}
+			$img_src = $result[0][0];
+			$img_path = $this->get_fully_qualified_image_path($img_src);
+			// Unlike Shane & Peter, we use timthumb to crop the image sent back by the uploader so that it fits within the dimensions of the widget editor. 
+			$html = '<img src="'.get_bloginfo('wpurl').'/wp-content/plugins/cac-featured-content/timthumb.php?src='.$img_path.' &h=50&w=50&q=100&a=l" class="avatar" width="50" hight="50"/>';
+			
 			if ($alt=='') $alt = $title;
 			?>
 			<script type="text/javascript">
