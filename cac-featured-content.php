@@ -3,7 +3,7 @@
 Plugin Name: CAC Featured Content
 Plugin URI: 
 Description: This plugin allows site authors to choose what content is to be featured on the home page of the cac site. 
-Version: 0.8
+Version: 0.8.3
 Author: Michael McManus, Cast Iron Coding
 Author URI: castironcoding.com
 License: GPL2
