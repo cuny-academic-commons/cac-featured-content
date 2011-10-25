@@ -39,5 +39,8 @@ There is not currently a FAQ available for this plugin. Please check back later.
 
 == Changelog ==
 
+= 0.8.4 =
+* Removes invalid WP_ADMIN constant reference
+
 = 0.8.3 =
 * Security update: updates TimThumb script to latest version
