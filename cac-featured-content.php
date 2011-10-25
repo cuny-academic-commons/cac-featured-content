@@ -139,7 +139,7 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 		
 		// The following is also from Shane & Peter. 
 		global $pagenow;
-		if (WP_ADMIN) {
+		if (is_admin() || is_network_admin()) {
     		add_action( 'admin_init', array( $this, 'fix_async_upload_image' ) );
 			if ( 'widgets.php' == $pagenow ) {
 				wp_enqueue_style( 'thickbox' );
