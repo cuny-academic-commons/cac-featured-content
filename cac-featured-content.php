@@ -460,7 +460,7 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 				If you leave this field blank, a generic title will be automatically rendered.
 				</label> 
 			<p></p>
-			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo attribute_escape($title); ?>" /><br/><br/>
+			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" /><br/><br/>
 		
 		<?php echo $this->getCropLengthField($crop_length, true); ?>
 		
@@ -785,7 +785,7 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 		if ($halfWidth) {
 			$halfWidth = 'style="width: 30%;"';
 		}
-		return '<input class="widefat" id="'.$this->get_field_id($field).'" name='.$this->get_field_name($field).' type="text" value="'.attribute_escape($intVal).'" '.$halfWidth.'/>';
+		return '<input class="widefat" id="'.$this->get_field_id($field).'" name='.$this->get_field_name($field).' type="text" value="'.esc_attr($intVal).'" '.$halfWidth.'/>';
 	}
 
 	function buildTextAreaField($field, $intVal) {

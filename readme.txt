@@ -42,6 +42,7 @@ There is not currently a FAQ available for this plugin. Please check back later.
 = 0.8.4 =
 * Fixes auto-height and width for BP avatars
 * Removes invalid WP_ADMIN constant reference
+* Fixes PHP notices
 
 = 0.8.3 =
 * Security update: updates TimThumb script to latest version
