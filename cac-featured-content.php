@@ -821,7 +821,14 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 		$post_excerpt = bp_create_excerpt($post->post_content);
 		$author_id = $post->post_author;
 		$author_email = get_the_author_meta('user_email',$author_id);
-		$avatar = bp_core_fetch_avatar( array( 'item_id' => $author_id, 'type' => 'full', height => $this->image_height , width => $this->image_width, no_grav => false ) );
+		
+		if ( !$height = (int)$this->image_height )
+			$height = '100';
+		
+		if ( !$width = (int)$this->image_width )
+			$width = '100';
+		
+		$avatar = bp_core_fetch_avatar( array( 'item_id' => $author_id, 'type' => 'full', 'height' => $height , 'width' => $width, 'no_grav' => false ) );
 		
 		/*************************
 		******Switch Context******
@@ -835,8 +842,8 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 		$post_with_one_image = $this->getPostContentImage($post->post_content);
 		$output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post_with_one_image, $matches);
 		
-		$first_img = $this->get_fully_qualified_image_path($matches[1][0]);
-		$the_post_image_link = $matches[0][0];
+		$first_img = isset( $matches[1][0] ) ? $this->get_fully_qualified_image_path($matches[1][0]) : '';
+		$the_post_image_link = isset( $matches[0][0] ) ? $matches[0][0] : '';
 		
 		if($this->title == '&nbsp;') {
 		    $header = 'Featured Post';
@@ -882,7 +889,7 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 		preg_match_all( '/<img[^>]*>/Ui', $content, $matches );
 		$content = preg_replace('/<img[^>]*>/Ui', '', $content );
 
-		if ( !empty( $matches ) ) {
+		if ( !empty( $matches[0][0] ) ) {
 			/* Get the SRC value */
 			preg_match( '/<img.*?(src\=[\'|"]{0,1}.*?[\'|"]{0,1})[\s|>]{1}/i', $matches[0][0], $src );
 
