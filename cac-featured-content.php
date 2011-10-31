@@ -885,7 +885,7 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 	* @param $content str - The content to work with
 	* @return $content str - The content with images stripped and replaced with a single thumb.
 	**/
-	function getPostContentImage($content) {
+	function getPostContentImage($content, $failreturn = 'content') {
 		preg_match_all( '/<img[^>]*>/Ui', $content, $matches );
 		$content = preg_replace('/<img[^>]*>/Ui', '', $content );
 
@@ -924,6 +924,10 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 				
 				$content = '<img class="avatar" src="' . esc_attr( $src) . '" width="' . $new_width . '" height="' . $new_height . '" alt="' . __( 'Thumbnail', 'buddypress' ) . '" class="align-left thumbnail" />';
 			}
+		} else {
+			if ( !$failreturn ) {
+				$content = false;
+			}
 		}
 		return $content;
 	}
@@ -940,7 +944,21 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 		$site_url = $blog->siteurl;
 		$blog_admin_email = get_blog_option($blog_id, 'admin_email');
 		$blog_admin_id = get_user_id_from_string($blog_admin_email);
-		$avatar = bp_core_fetch_avatar( array( 'item_id' => $blog_admin_id, 'type' => 'full', height => $this->image_height, width => $this->image_width, no_grav => false ) );
+
+		if ( (int) $this->image_width ) {
+			$width = $this->image_width;
+		} else {
+			$width = '100';
+		}
+		
+		if ( (int) $this->image_height ) {
+			$height = $this->image_height;
+		} else {
+			$height = '100';
+		}		
+		
+		$avatar = apply_filters( 'cac_featured_content_blog_avatar', bp_core_fetch_avatar( array( 'item_id' => $blog_admin_id, 'type' => 'full', 'height' => $height, 'width' => $width, 'no_grav' => false ) ), $blog_id );
+		
 		switch_to_blog($blog_id);
 		$posts = get_posts();
 		
