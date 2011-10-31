@@ -906,10 +906,16 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 					$width = 100;
 					$height = 100;
 				}
-				// Thiss was modified from the original so that the width gets set to whatever the user has selected in the plugin.
-				$ratio = (int)$height / (int)$width;
-				$new_width = $this->image_width;
-				$new_height = $new_width * $ratio;
+				// This was modified from the original so that the width gets set to whatever the user has selected in the plugin.
+				if ( (int) $this->image_width ) {
+					$ratio = (int)$height / (int)$width;
+					$new_width = $this->image_width;
+					$new_height = $new_width * $ratio;
+				} else {
+					$new_width = $width;
+					$new_height= $height;
+				}
+				
 				
 				// If you wanted the image to be scaled to fit a height, you could use the following:
 				// $ratio = (int)$width / (int)$height;

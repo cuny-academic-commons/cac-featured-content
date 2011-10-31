@@ -30,14 +30,18 @@ class CACFeaturedContentHelper {
 	 * @return object 
 	 */
 	function getPostBySlug($slug, $blog_id) {
-	   switch_to_blog($blog_id);
-	       $posts = get_posts();
-	       foreach($posts as $post) {
-	       	   if ( $post->post_name == $slug )
-		         $single_post = $post;
-		   }
-	   restore_current_blog();
-	   return (object) $single_post;
+		switch_to_blog($blog_id);
+	       
+	       	$posts = new WP_Query( array( 'name' => $slug ) );
+	       
+	       	foreach($posts as $post) {
+			if ( $post->post_name == $slug ) {
+				$single_post = $post;
+			}
+		}
+
+		restore_current_blog();
+		return (object) $single_post;
 	}
 
 	/**

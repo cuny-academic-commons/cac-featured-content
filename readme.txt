@@ -40,6 +40,7 @@ There is not currently a FAQ available for this plugin. Please check back later.
 == Changelog ==
 
 = 0.8.4 =
+* Fixes code that pulls first image from WP posts when blog posts are featured
 * Fixes auto-height and width for BP avatars
 * Removes invalid WP_ADMIN constant reference
 * Fixes PHP notices
