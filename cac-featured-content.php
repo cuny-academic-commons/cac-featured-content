@@ -916,7 +916,6 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 					$new_height= $height;
 				}
 
-
 				// If you wanted the image to be scaled to fit a height, you could use the following:
 				// $ratio = (int)$width / (int)$height;
 				// $new_height = $this->image_height;
@@ -957,10 +956,35 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 			$height = '100';
 		}
 
-		$avatar = apply_filters( 'cac_featured_content_blog_avatar', bp_core_fetch_avatar( array( 'item_id' => $blog_admin_id, 'type' => 'full', 'height' => $height, 'width' => $width, 'no_grav' => false ) ), $blog_id );
+		$imageurl = false;
+		if ( $this->imageurl ) {
+			$imageurl = $this->imageurl;
+		} elseif( $this->resource_image_source ) {
+			$imageurl = $this->resource_image_source;
+		}
 
 		switch_to_blog($blog_id);
-		$posts = get_posts();
+
+		// Try to get a post image before falling back on the user avatar
+		$blog_posts = new WP_Query( array( 'post_type' => 'post' ) );
+		if ( $blog_posts->have_posts() ) {
+			while ( $blog_posts->have_posts() ) {
+				$blog_posts->the_post();
+				$image = $this->getPostContentImage( get_the_content(), false );
+
+				if ( !empty( $image ) ) {
+					break;
+				}
+			}
+		}
+
+		if ( empty( $image ) ) {
+			$avatar = bp_core_fetch_avatar( array( 'item_id' => $blog_admin_id, 'type' => 'full', 'height' => $height, 'width' => $width, 'no_grav' => false ) );
+		} else {
+			$avatar = $image;
+		}
+
+		$avatar = apply_filters( 'cac_featured_content_blog_avatar', $avatar, $blog_id );
 
 		if($this->title == '&nbsp;') {
 		    $header = 'Featured Blog';
