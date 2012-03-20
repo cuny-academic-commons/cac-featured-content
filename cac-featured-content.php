@@ -353,19 +353,19 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 		$this->read_more_text = empty($instance['read_more_text']) ? '' : apply_filters('widget_read_more_text', $instance['read_more_text']);
 		
 		$type = empty($instance['type']) ? '&nbsp;' : $instance['type'];
-		$this->blog_id = empty($instance['blog_id']) ? '&nbsp;' : $instance['blog_id'];
-		$this->blog_domain = empty($instance['blog_domain']) ? '&nbsp;' : $instance['blog_domain'];
-		$this->post_domain = empty($instance['post_domain']) ? '&nbsp;' : $instance['post_domain'];
-		$this->post_slug = empty($instance['post_slug']) ? '&nbsp;' : $instance['post_slug'];
-		$this->group_slug = empty($instance['group_slug']) ? '&nbsp;' : $instance['group_slug'];
-		$this->group_id = empty($instance['group_id']) ? '&nbsp;' : $instance['group_id'];
+		
+		$this->blog_id         = empty($instance['blog_id']) ? '&nbsp;' : $instance['blog_id'];
+		$this->blog_domain     = empty($instance['blog_domain']) ? '&nbsp;' : $instance['blog_domain'];
+		$this->post_domain     = empty($instance['post_domain']) ? '&nbsp;' : $instance['post_domain'];
+		$this->post_slug       = empty($instance['post_slug']) ? '&nbsp;' : $instance['post_slug'];
+		$this->group_slug      = empty($instance['group_slug']) ? '&nbsp;' : $instance['group_slug'];
+		$this->group_id        = empty($instance['group_id']) ? '&nbsp;' : $instance['group_id'];
 		$this->member_identifier = empty($instance['member_identifier']) ? '&nbsp;' : $instance['member_identifier'];
-		$this->resource_link = empty($instance['resource_link']) ? '&nbsp;' : $instance['resource_link'];
-		$this->resource_text = empty($instance['resource_text']) ? '&nbsp;' : $instance['resource_text'];
-		$this->resource_title = empty($instance['resource_title']) ? '&nbsp;' : $instance['resource_title'];
+		$this->resource_link   = empty($instance['resource_link']) ? '&nbsp;' : $instance['resource_link'];
+		$this->resource_text   = empty($instance['resource_text']) ? '&nbsp;' : $instance['resource_text'];
+		$this->resource_title  = empty($instance['resource_title']) ? '&nbsp;' : $instance['resource_title'];
 		$this->resource_image_source = empty($instance['resource_image_source']) ? '&nbsp;' : $instance['resource_image_source'];
-		$this->crop_config = $this->crop_length."|&nbsp;...|1";
-		$this->noimage = $instance['noimage'];
+		$this->noimage         = empty( $instance['noimage'] ) ? '' : $instance['noimage'];
 
 
 		/**********************
@@ -402,6 +402,7 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 		$instance['resource_text'] = strip_tags($new_instance['resource_text'], '<img>');
 		$instance['resource_title'] = strip_tags($new_instance['resource_title']);
 		$instance['resource_image_source'] = strip_tags($new_instance['resource_image_source']);
+		$instance['noimage'] = isset($new_instance['noimage']);
 
 		return $instance;
 	}
@@ -546,20 +547,8 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 			?><br />
 			<a href="<?php echo $image_upload_iframe_src; ?>&TB_iframe=true" id="add_image-<?php echo $this->get_field_id('image'); ?>" class="thickbox-cac-featured-content-widget" title='<?php echo $image_title; ?>' onClick="set_active_widget('<?php echo $this->id; ?>');return false;" style="text-decoration:none"><img src='images/media-button-image.gif' alt='<?php echo $image_title; ?>' align="absmiddle" /> <?php echo $image_title; ?></a>
 			<div id="display-<?php echo $this->get_field_id('image'); ?>"><?php
-			if ($instance['imageurl']) {
-				echo '<img src="'.get_bloginfo('wpurl').'/wp-content/plugins/cac-featured-content/timthumb.php?src='.$this->get_fully_qualified_image_path($instance['imageurl']).'&w=50&q=100" class="avatar" width="50" hight="50"/>';
-				// echo "<img src=\"{$instance['imageurl']}\" alt=\"{$instance['image_title']}\" style=\"";
-				// 					if ($instance['width'] && is_numeric($instance['width'])) {
-				// 						echo "max-width: {$instance['width']}px;";
-				// 					}
-				// 					if ($instance['height'] && is_numeric($instance['height'])) {
-				// 						echo "max-height: {$instance['height']}px;";
-				// 					}
-				// 					echo "\"";
-				// 					if (!empty($instance['align']) && $instance['align'] != 'none') {
-				// 						echo " class=\"align{$instance['align']}\"";
-				// 					}
-				// 					echo " />";
+			if ( $instance['imageurl'] ) {
+				echo '<img src="' . get_bloginfo( 'wpurl' ) . '/wp-content/plugins/cac-featured-content/timthumb.php?src=' . $this->get_fully_qualified_image_path( $instance['imageurl'] ) . '&w=50&q=100" class="avatar" width="50" hight="50"/>';
 			}
 			?>
 			<br />
@@ -854,7 +843,7 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 		**************************/
 		switch_to_blog($blog_id);
 
-		$the_posts = new WP_Query( array( 'p' => $post->ID, 'posts_per_page' => 1 ) );
+		$the_posts = new WP_Query( array( 'p' => $post->ID, 'posts_per_page' => 1, 'post_type' => array( 'post', 'page' ) ) );
 
 		//Set the loop for this one post
 		if ( $the_posts->have_posts() ) { while( $the_posts->have_posts() ) : $the_posts->the_post();

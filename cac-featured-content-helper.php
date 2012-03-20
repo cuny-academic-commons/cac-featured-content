@@ -50,7 +50,7 @@ class CACFeaturedContentHelper {
 
 		switch_to_blog($blog_id);
 
-	       	$posts = new WP_Query( array( 'name' => $slug ) );
+	       	$posts = new WP_Query( array( 'name' => $slug, 'post_type' => array( 'post', 'page' ) ) );
 	       	
 		if ( $posts->have_posts() ) {
 			while ( $posts->have_posts() ) {
