@@ -352,19 +352,21 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 		// If no Read More text is provided, don't show a link at all
 		$this->read_more_text = empty($instance['read_more_text']) ? '' : apply_filters('widget_read_more_text', $instance['read_more_text']);
 		
-		$type = empty($instance['type']) ? '&nbsp;' : apply_filters('widget_id', $instance['type']);
-		$this->blog_id = empty($instance['blog_id']) ? '&nbsp;' : apply_filters('widget_id', $instance['blog_id']);
-		$this->blog_domain = empty($instance['blog_domain']) ? '&nbsp;' : apply_filters('widget_id', $instance['blog_domain']);
-		$this->post_domain = empty($instance['post_domain']) ? '&nbsp;' : apply_filters('widget_id', $instance['post_domain']);
-		$this->post_slug = empty($instance['post_slug']) ? '&nbsp;' : apply_filters('widget_id', $instance['post_slug']);
-		$this->group_slug = empty($instance['group_slug']) ? '&nbsp;' : apply_filters('widget_id', $instance['group_slug']);
-		$this->group_id = empty($instance['group_id']) ? '&nbsp;' : apply_filters('widget_id', $instance['group_id']);
-		$this->member_identifier = empty($instance['member_identifier']) ? '&nbsp;' : apply_filters('widget_id', $instance['member_identifier']);
-		$this->resource_link = empty($instance['resource_link']) ? '&nbsp;' : apply_filters('widget_id', $instance['resource_link']);
-		$this->resource_text = empty($instance['resource_text']) ? '&nbsp;' : apply_filters('widget_id', $instance['resource_text']);
-		$this->resource_title = empty($instance['resource_title']) ? '&nbsp;' : apply_filters('widget_id', $instance['resource_title']);
-		$this->resource_image_source = empty($instance['resource_image_source']) ? '&nbsp;' : apply_filters('widget_id', $instance['resource_image_source']);
+		$type = empty($instance['type']) ? '&nbsp;' : $instance['type'];
+		$this->blog_id = empty($instance['blog_id']) ? '&nbsp;' : $instance['blog_id'];
+		$this->blog_domain = empty($instance['blog_domain']) ? '&nbsp;' : $instance['blog_domain'];
+		$this->post_domain = empty($instance['post_domain']) ? '&nbsp;' : $instance['post_domain'];
+		$this->post_slug = empty($instance['post_slug']) ? '&nbsp;' : $instance['post_slug'];
+		$this->group_slug = empty($instance['group_slug']) ? '&nbsp;' : $instance['group_slug'];
+		$this->group_id = empty($instance['group_id']) ? '&nbsp;' : $instance['group_id'];
+		$this->member_identifier = empty($instance['member_identifier']) ? '&nbsp;' : $instance['member_identifier'];
+		$this->resource_link = empty($instance['resource_link']) ? '&nbsp;' : $instance['resource_link'];
+		$this->resource_text = empty($instance['resource_text']) ? '&nbsp;' : $instance['resource_text'];
+		$this->resource_title = empty($instance['resource_title']) ? '&nbsp;' : $instance['resource_title'];
+		$this->resource_image_source = empty($instance['resource_image_source']) ? '&nbsp;' : $instance['resource_image_source'];
 		$this->crop_config = $this->crop_length."|&nbsp;...|1";
+		$this->noimage = $instance['noimage'];
+
 
 		/**********************
 		****** OUTPUT *********
