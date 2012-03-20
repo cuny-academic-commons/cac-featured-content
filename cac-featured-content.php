@@ -537,32 +537,36 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 			<?php
 			echo $this->getResourceTextField($resource_text, true);
 			?>
-			<p>You can choose to use an image with an external source, or select an image from the media library.</p>
-			<hr />
-			<p><label for="<?php echo $this->get_field_id('image'); ?>"><?php _e('Image from the media library:', $this->pluginDomain); ?></label>
-			<?php
-				$media_upload_iframe_src = "media-upload.php?type=image&widget_id=".$this->id; //NOTE #1: the widget id is added here to allow uploader to only return array if this is used with image widget so that all other uploads are not harmed.
-				$image_upload_iframe_src = apply_filters('image_upload_iframe_src', "$media_upload_iframe_src");
-				$image_title = __(($instance['image'] ? 'Change Image' : 'Add Image'), $this->pluginDomain);
-			?><br />
-			<a href="<?php echo $image_upload_iframe_src; ?>&TB_iframe=true" id="add_image-<?php echo $this->get_field_id('image'); ?>" class="thickbox-cac-featured-content-widget" title='<?php echo $image_title; ?>' onClick="set_active_widget('<?php echo $this->id; ?>');return false;" style="text-decoration:none"><img src='images/media-button-image.gif' alt='<?php echo $image_title; ?>' align="absmiddle" /> <?php echo $image_title; ?></a>
-			<div id="display-<?php echo $this->get_field_id('image'); ?>"><?php
-			if ( $instance['imageurl'] ) {
-				echo '<img src="' . get_bloginfo( 'wpurl' ) . '/wp-content/plugins/cac-featured-content/timthumb.php?src=' . $this->get_fully_qualified_image_path( $instance['imageurl'] ) . '&w=50&q=100" class="avatar" width="50" hight="50"/>';
-			}
-			?>
-			<br />
-			<a class="remove">Remove image</a>
-			</div>
-			<input id="<?php echo $this->get_field_id('image'); ?>" name="<?php echo $this->get_field_name('image'); ?>" type="hidden" value="<?php echo $instance['image']; ?>" />
-			</p>
-			<?php
-			echo $this->getResourceImageSourceField($resource_image_source, true);
-			?>
-			<?php
-			echo $this->getImageCropRuleField($image_crop_rule, true);
-			?>
 		</div>
+
+		<p>You can choose to use an image with an external source, or select an image from the media library.</p>
+		<hr />
+		<p><label for="<?php echo $this->get_field_id('image'); ?>"><?php _e('Image from the media library:', $this->pluginDomain); ?></label>
+		<?php
+			$media_upload_iframe_src = "media-upload.php?type=image&widget_id=".$this->id; //NOTE #1: the widget id is added here to allow uploader to only return array if this is used with image widget so that all other uploads are not harmed.
+			$image_upload_iframe_src = apply_filters('image_upload_iframe_src', "$media_upload_iframe_src");
+			$image_title = __(($instance['image'] ? 'Change Image' : 'Add Image'), $this->pluginDomain);
+		?><br />
+		<a href="<?php echo $image_upload_iframe_src; ?>&TB_iframe=true" id="add_image-<?php echo $this->get_field_id('image'); ?>" class="thickbox-cac-featured-content-widget" title='<?php echo $image_title; ?>' onClick="set_active_widget('<?php echo $this->id; ?>');return false;" style="text-decoration:none"><img src='images/media-button-image.gif' alt='<?php echo $image_title; ?>' align="absmiddle" /> <?php echo $image_title; ?></a>
+		<div id="display-<?php echo $this->get_field_id('image'); ?>"><?php
+		if ( $instance['imageurl'] ) {
+			echo '<img src="' . get_bloginfo( 'wpurl' ) . '/wp-content/plugins/cac-featured-content/timthumb.php?src=' . $this->get_fully_qualified_image_path( $instance['imageurl'] ) . '&w=50&q=100" class="avatar" width="50" hight="50"/>';
+		}
+		?>
+		<br />
+		<a class="remove">Remove image</a>
+		</div>
+		<input id="<?php echo $this->get_field_id('image'); ?>" name="<?php echo $this->get_field_name('image'); ?>" type="hidden" value="<?php echo $instance['image']; ?>" />
+		</p>
+		<?php
+		echo $this->getResourceImageSourceField($resource_image_source, true);
+		echo $this->getImageCropRuleField($image_crop_rule, true);
+		
+		$checked = !empty( $instance['noimage'] ) ? ' checked="checked" ' : '';
+		echo '<div id="no-image"><input type="checkbox" value="1" name="' . $this->get_field_name('noimage') . '"' . $checked . '><label for="' . $this->get_field_name('noimage') . '"> No image</label></div>';
+		
+		?>
+		
 <?php
 	}
 
@@ -864,12 +868,15 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 		?>
 		<h3><?php echo $header ?></h3>
 			<div>
-				<?php if($the_post_image_link): ?>
-					<?php echo $the_post_image_link ?>
-					<!-- <img src="<?php echo get_bloginfo('wpurl');?>/wp-content/plugins/cac-featured-content/timthumb.php?src=<?php echo $the_post_image_link ?>&h=<?php echo $this->image_height ?>&w=<?php echo $this->image_width ?>&q=100&a=c" class="avatar" /> -->
-				<?php else: ?>
-				<?php echo $avatar; ?>
-				<?php endif; ?>
+				<?php if ( !$this->noimage ) : ?>
+					<?php if($the_post_image_link): ?>
+						<?php echo $the_post_image_link ?>
+						<!-- <img src="<?php echo get_bloginfo('wpurl');?>/wp-content/plugins/cac-featured-content/timthumb.php?src=<?php echo $the_post_image_link ?>&h=<?php echo $this->image_height ?>&w=<?php echo $this->image_width ?>&q=100&a=c" class="avatar" /> -->
+					<?php else: ?>
+						<?php echo $avatar; ?>
+					<?php endif; ?>
+				<?php endif ?>
+				
 				<div class="cac-content">
 				<h4><a href="<?php echo the_permalink() ?>"><?php echo get_the_title() ?></a></h4>
 				<!-- <p>by&nbsp;<a style="display: block;" href="<?php echo bp_core_get_user_domain($author_id) ?>"><?php the_author() ?></a></p> -->
@@ -1016,7 +1023,10 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 		?>
 		<h3><?php echo $header ?></h3>
 		<div>
-		    <?php echo $avatar ?>
+		    <?php if ( !$this->noimage ) : ?>
+			    <?php echo $avatar ?>
+		    <?php endif ?>
+		    
 		    <div class="cac-content">
 		    <h4><a href="<?php echo $site_url ?>"><?php echo $blog_name?></a></h4>
 			<p>
@@ -1058,12 +1068,16 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 			$height = '100';
 		}
 		
+		$group_id = BP_Groups_Group::group_exists( $this->group_slug );
+		
 		?>
-		<?php if(bp_has_groups('type=single-group&slug='.$this->group_slug)): ?>
+		<?php if ( $group_id && bp_has_groups( array( 'include' => array( $group_id ) ) ) ) : ?>
 			<?php while(bp_groups()) : bp_the_group(); ?>
 		    <h3><?php echo $header ?></h3>
 			<div style="display: inline-block; ">
-				<?php bp_group_avatar(array('width' => $width, 'height'=> $height)) ?>
+			        <?php if ( !$this->noimage ) : ?>
+					<?php bp_group_avatar(array('width' => $width, 'height'=> $height)) ?>
+				<?php endif ?>
 
 			        <div class="cac-content">
 			   	<h4><a href="<?php bp_group_permalink() ?>"><?php bp_group_name() ?></a></h4>
@@ -1105,9 +1119,11 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 		?>
 		<?php if  ( bp_has_members('include='.$user_id.'&max=1') ) : ?>
 			<?php while  ( bp_members() ) : bp_the_member(); ?>
-			    <h3><?php echo $header ?></h3>
-			    <div>
-					<?php echo $avatar ?>
+				<h3><?php echo $header ?></h3>
+				<div>
+					<?php if ( !$this->noimage ) : ?>
+						<?php echo $avatar ?>
+					<?php endif ?>
 					
 					<div class="cac-content">
 					<div>
@@ -1125,7 +1141,7 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 					<?php endif ?>
 					
 					</div>
-			    </div>
+				</div>
 			<?php endwhile; ?>
 		<?php endif; ?>
 		<?php
@@ -1141,7 +1157,7 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 	    <h3><?php echo $header ?></h3>
 	    <div>
 
-		<?php if($this->imageurl || $this->resource_image_source) ?>
+		<?php if ( !$this->noimage && ( $this->imageurl || $this->resource_image_source ) ) ?>
 			<?php if($this->imageurl): ?>
 				<img src="<?php echo get_bloginfo('wpurl');?>/wp-content/plugins/cac-featured-content/timthumb.php?src=<?php echo $this->imageurl ?>&h=<?php echo $this->image_height ?>&w=<?php echo $this->image_width ?>&q=100&a=<?php echo $this->image_crop_rule ?>" class="avatar" />
 			<?php else: ?>
