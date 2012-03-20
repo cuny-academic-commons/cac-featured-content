@@ -938,8 +938,14 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 
 			if ( !empty( $src ) ) {
 				$src = substr( substr( str_replace( 'src=', '', $src[1] ), 0, -1 ), 1 );
-				$height = substr( substr( str_replace( 'height=', '', $height[1] ), 0, -1 ), 1 );
-				$width = substr( substr( str_replace( 'width=', '', $width[1] ), 0, -1 ), 1 );
+				
+				if ( !empty( $height[1] ) ) {
+					$height = substr( substr( str_replace( 'height=', '', $height[1] ), 0, -1 ), 1 );
+				}
+				
+				if ( !empty( $width[1] ) ) {
+					$width = substr( substr( str_replace( 'width=', '', $width[1] ), 0, -1 ), 1 );
+				}
 
 				if ( empty( $width ) || empty( $height ) ) {
 					$width = 100;
