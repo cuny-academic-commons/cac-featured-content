@@ -381,28 +381,29 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 
 	function update($new_instance, $old_instance) {
 		$instance = $old_instance;
-		$instance['image'] = $new_instance['image'];
-		$instance['imageurl'] = $this->get_image_url($new_instance['image'],100,100);  // image resizing not working right now
+		
+		$instance['image']       = $new_instance['image'];
+		$instance['imageurl']    = $this->get_image_url($new_instance['image'],100,100);  // image resizing not working right now
 		$instance['image_title'] = strip_tags($new_instance['image_title']);
 		$instance['image_crop_rule'] = strip_tags($new_instance['image_crop_rule']);
-		$instance['title'] = strip_tags($new_instance['title']);
+		$instance['title']       = strip_tags($new_instance['title']);
 		$instance['crop_length'] = strip_tags($new_instance['crop_length']);
 		$instance['image_width'] = strip_tags($new_instance['image_width']);
 		$instance['image_height'] = strip_tags($new_instance['image_height']);
 		$instance['read_more_text'] = strip_tags($new_instance['read_more_text']);
-		$instance['type'] = strip_tags($new_instance['type']);
-		$instance['blog_id'] = strip_tags($new_instance['blog_id']);
+		$instance['type']        = strip_tags($new_instance['type']);
+		$instance['blog_id']     = strip_tags($new_instance['blog_id']);
 		$instance['blog_domain'] = strip_tags($new_instance['blog_domain']);
 		$instance['post_domain'] = strip_tags($new_instance['post_domain']);
-		$instance['post_slug'] = strip_tags($new_instance['post_slug']);
-		$instance['group_slug'] = strip_tags($new_instance['group_slug']);
-		$instance['group_id'] = strip_tags($new_instance['group_id']);
+		$instance['post_slug']   = strip_tags($new_instance['post_slug']);
+		$instance['group_slug']  = strip_tags($new_instance['group_slug']);
+		$instance['group_id']    = strip_tags($new_instance['group_id']);
 		$instance['member_identifier'] = strip_tags($new_instance['member_identifier']);
 		$instance['resource_link'] = strip_tags($new_instance['resource_link']);
 		$instance['resource_text'] = strip_tags($new_instance['resource_text'], '<img>');
 		$instance['resource_title'] = strip_tags($new_instance['resource_title']);
 		$instance['resource_image_source'] = strip_tags($new_instance['resource_image_source']);
-		$instance['noimage'] = isset($new_instance['noimage']);
+		$instance['noimage']     = isset($new_instance['noimage']);
 
 		return $instance;
 	}
@@ -456,6 +457,8 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 		$resource_text 		= $instance['resource_text'];
 		$resource_title 	= $instance['resource_title'];
 		$resource_image_source 	= $instance['resource_image_source'];
+
+		$this->instance = $instance;
 
 		/********************
 		 *****Form Data******
@@ -852,12 +855,31 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 		//Set the loop for this one post
 		if ( $the_posts->have_posts() ) { while( $the_posts->have_posts() ) : $the_posts->the_post();
 
-		// Ok, we're just going to go in search of an image in the post_content
-		$post_with_one_image = $this->getPostContentImage(get_the_content());
-		$output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post_with_one_image, $matches);
-
-		$first_img = isset( $matches[1][0] ) ? $this->get_fully_qualified_image_path($matches[1][0]) : '';
-		$the_post_image_link = isset( $matches[0][0] ) ? $matches[0][0] : '';
+		// If the admin has provided a manual image URL, use it
+		$imageurl = false;
+		if ( $this->imageurl ) {
+			$imageurl = $this->imageurl;
+		} else if ( $this->resource_image_source ) {
+			$imageurl = $this->resource_image_source;
+		}
+		
+		// Trimming escaped spaces
+		$imageurl = trim( $imageurl, '&nbsp;' );
+		
+		if ( empty( $imageurl ) ) {
+			// Ok, we're just going to go in search of an image in the post_content
+			$post_with_one_image = $this->getPostContentImage(get_the_content());
+			$output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post_with_one_image, $matches);
+	
+			$first_img = isset( $matches[1][0] ) ? $this->get_fully_qualified_image_path($matches[1][0]) : '';
+			$the_image = isset( $matches[0][0] ) ? $matches[0][0] : '';
+			
+			if ( !$the_image ) {
+				$the_image = $avatar;
+			}
+		} else {
+			$the_image = "<img src='$imageurl' height='$height' width='$width' />"; 
+		}
 
 		if($this->title == '&nbsp;') {
 		    $header = 'Featured Post';
@@ -869,20 +891,13 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 		<h3><?php echo $header ?></h3>
 			<div>
 				<?php if ( !$this->noimage ) : ?>
-					<?php if($the_post_image_link): ?>
-						<?php echo $the_post_image_link ?>
-						<!-- <img src="<?php echo get_bloginfo('wpurl');?>/wp-content/plugins/cac-featured-content/timthumb.php?src=<?php echo $the_post_image_link ?>&h=<?php echo $this->image_height ?>&w=<?php echo $this->image_width ?>&q=100&a=c" class="avatar" /> -->
-					<?php else: ?>
-						<?php echo $avatar; ?>
-					<?php endif; ?>
+					<?php echo $the_image ?>
 				<?php endif ?>
 				
 				<div class="cac-content">
 				<h4><a href="<?php echo the_permalink() ?>"><?php echo get_the_title() ?></a></h4>
-				<!-- <p>by&nbsp;<a style="display: block;" href="<?php echo bp_core_get_user_domain($author_id) ?>"><?php the_author() ?></a></p> -->
-				<!-- from the blog <a href="<?php echo $site_url ?>"><em style="line-height: 14px; display: block; margin-top: 10px;"><?php bloginfo('name') ?></em></a> -->
-				<!-- <div class="clear"></div> -->
-				<p><?php echo bp_create_excerpt( get_the_content(), $this->crop_length ); ?></p>
+				
+				<p><?php echo bp_create_excerpt( get_the_content(), $this->crop_length, array( 'html' => false ) ); ?></p>
 				
 				<?php if ( $this->read_more_text ) : ?>
 				<p class="more">
@@ -986,18 +1001,25 @@ class Cac_Featured_Content_Widget extends WP_Widget {
 		} elseif( $this->resource_image_source ) {
 			$imageurl = $this->resource_image_source;
 		}
+		
+		// Trimming escaped spaces
+		$imageurl = trim( $imageurl, '&nbsp;' );
 
 		switch_to_blog($blog_id);
 
-		// Try to get a post image before falling back on the user avatar
-		$blog_posts = new WP_Query( array( 'post_type' => 'post' ) );
-		if ( $blog_posts->have_posts() ) {
-			while ( $blog_posts->have_posts() ) {
-				$blog_posts->the_post();
-				$image = $this->getPostContentImage( get_the_content(), false );
-
-				if ( !empty( $image ) ) {
-					break;
+		if ( $imageurl ) {
+			$image = "<img src='$imageurl' height='$height' width='$width' />";
+		} else {
+			// Try to get a post image before falling back on the user avatar
+			$blog_posts = new WP_Query( array( 'post_type' => 'post' ) );
+			if ( $blog_posts->have_posts() ) {
+				while ( $blog_posts->have_posts() ) {
+					$blog_posts->the_post();
+					$image = $this->getPostContentImage( get_the_content(), false );
+	
+					if ( !empty( $image ) ) {
+						break;
+					}
 				}
 			}
 		}
