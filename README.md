@@ -1,5 +1,3 @@
-![Commons Logo]()
-
 # Introduction
 The CAC Featured Content Widget is a plugin developed for the [CUNY Academic Commons](http://commons.gc.cuny.edu) an academic social network powered by WordPress, BuddyPress, and MediaWiki. The widget provides several useful tools for featuring selected content, such as Featured Blogs, Featured Groups, Featured Posts, Featured Members and Featured Resources. Currently the plugin will work on both single and multisite installs, but is BuddyPress __dependent__. It will __not__ work on a non-BuddyPress install.
 
