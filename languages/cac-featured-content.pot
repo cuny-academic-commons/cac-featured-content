@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CAC Featured Content Widget\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-09 00:40-0500\n"
-"PO-Revision-Date: 2012-09-09 00:40-0500\n"
+"POT-Creation-Date: 2012-11-03 17:08-0500\n"
+"PO-Revision-Date: 2012-11-03 17:09-0500\n"
 "Last-Translator: Dominic Giglio <humanshell@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -11,33 +11,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: __;gettext;gettext_noop;_e\n"
 "X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../cac-featured-controller.php:35
+#: ../cac-featured-controller.php:39
 msgid "Invalid Blog Name."
 msgstr ""
 
-#: ../cac-featured-controller.php:73
+#: ../cac-featured-controller.php:77
 msgid "Invalid Group Name."
 msgstr ""
 
-#: ../cac-featured-controller.php:118
+#: ../cac-featured-controller.php:122
 msgid "Invalid Post Slug."
 msgstr ""
 
-#: ../cac-featured-controller.php:156
+#: ../cac-featured-controller.php:160
 msgid "Invalid Member Username."
 msgstr ""
 
-#: ../cac-featured-helper.php:143
+#: ../cac-featured-helper.php:158
 msgid "Thumbnail"
 msgstr ""
 
-#: ../cac-featured-helper.php:165
+#: ../cac-featured-helper.php:180
 msgid "Error"
 msgstr ""
 
-#: ../cac-featured-helper.php:168
+#: ../cac-featured-helper.php:183
 msgid "Please correct and reload."
 msgstr ""
 
@@ -57,105 +58,109 @@ msgid "Widget Title"
 msgstr ""
 
 #: ../cac-featured-main.php:122
+msgid "Widget Title Element"
+msgstr ""
+
+#: ../cac-featured-main.php:139
 msgid "Featured Content Type"
 msgstr ""
 
-#: ../cac-featured-main.php:127
+#: ../cac-featured-main.php:145
 msgid "Group"
 msgstr ""
 
-#: ../cac-featured-main.php:128
+#: ../cac-featured-main.php:146
 msgid "Post"
 msgstr ""
 
-#: ../cac-featured-main.php:129
+#: ../cac-featured-main.php:147
 msgid "Member"
 msgstr ""
 
-#: ../cac-featured-main.php:130
+#: ../cac-featured-main.php:148
 msgid "Resource"
 msgstr ""
 
-#: ../cac-featured-main.php:135
+#: ../cac-featured-main.php:153
 msgid "Enter featured post name"
 msgstr ""
 
-#: ../cac-featured-main.php:136 ../cac-featured-main.php:240
-msgid "You must enter a blog address first <br /> no http:// required"
+#: ../cac-featured-main.php:154 ../cac-featured-main.php:266
+msgid "no http:// required"
 msgstr ""
 
-#: ../cac-featured-main.php:143
+#: ../cac-featured-main.php:161
 msgid "Enter featured group name"
 msgstr ""
 
-#: ../cac-featured-main.php:151
+#: ../cac-featured-main.php:169
 msgid "Enter featured member username"
 msgstr ""
 
-#: ../cac-featured-main.php:159
+#: ../cac-featured-main.php:177
 msgid "Enter featured resource title"
 msgstr ""
 
-#: ../cac-featured-main.php:166
+#: ../cac-featured-main.php:184
 msgid "Enter featured resource link"
 msgstr ""
 
-#: ../cac-featured-main.php:173
+#: ../cac-featured-main.php:191
 msgid "Custom Description"
 msgstr ""
 
-#: ../cac-featured-main.php:174
+#: ../cac-featured-main.php:192
 msgid ""
 "Leave this blank and we'll select text appropriate for your featured item (e."
 "g. a group description)."
 msgstr ""
 
-#: ../cac-featured-main.php:180
+#: ../cac-featured-main.php:198
 msgid "Crop Length (characters)"
 msgstr ""
 
-#: ../cac-featured-main.php:189
+#: ../cac-featured-main.php:207
 msgid "Read More Label"
 msgstr ""
 
-#: ../cac-featured-main.php:202
+#: ../cac-featured-main.php:220
 msgid "Display Images"
 msgstr ""
 
-#: ../cac-featured-main.php:207
+#: ../cac-featured-main.php:225
 msgid "Image URL"
 msgstr ""
 
-#: ../cac-featured-main.php:208
+#: ../cac-featured-main.php:226
 msgid ""
 "Leave this blank and we'll try to find an image appropriate to your featured "
 "item (e.g. an avatar)."
 msgstr ""
 
-#: ../cac-featured-main.php:214
+#: ../cac-featured-main.php:232
 msgid "Image Width"
 msgstr ""
 
-#: ../cac-featured-main.php:223
+#: ../cac-featured-main.php:241
 msgid "Image Height"
 msgstr ""
 
-#: ../cac-featured-main.php:237
+#: ../cac-featured-main.php:255
 msgid "Blog"
 msgstr ""
 
-#: ../cac-featured-main.php:247
+#: ../cac-featured-main.php:258
+msgid "You must enter a blog address first <br /> no http:// required"
+msgstr ""
+
+#: ../cac-featured-main.php:265
 msgid "Enter featured blog address"
 msgstr ""
 
-#: ../cac-featured-main.php:248
-msgid "no http:// required"
-msgstr ""
-
-#: ../views/cac-featured-group.php:31
+#: ../views/cac-featured-group.php:37
 msgid "Status:"
 msgstr ""
 
-#: ../views/cac-featured-group.php:31
+#: ../views/cac-featured-group.php:37
 msgid "Members"
 msgstr ""
