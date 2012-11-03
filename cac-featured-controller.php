@@ -21,6 +21,7 @@ $cfcw_view = new CAC_Featured_Content_View();
 $cfcw_view->content_type   = $params['featured_content_type'];
 $cfcw_view->description    = $params['custom_description'];
 $cfcw_view->display_images = $params['display_images'];
+$cfcw_view->title_element  = $params['title_element'];
 $cfcw_view->crop_length    = $params['crop_length'];
 $cfcw_view->image_width    = $params['image_width'];
 $cfcw_view->image_height   = $params['image_height'];
