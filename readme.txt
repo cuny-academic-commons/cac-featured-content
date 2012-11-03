@@ -4,7 +4,7 @@ Author URI: http://humanshell.net
 Plugin URI: https://github.com/cuny-academic-commons/cac-featured-content
 Tags: buddypress, multisite, feature, featured, highlight
 Requires at least: 3.3
-Tested up to: 3.4
+Tested up to: 3.4.2
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -36,6 +36,9 @@ Additional technical details can be found in the plugin's README on [Github](htt
 
 == Upgrade Notice ==
 
+= 1.0.1 =
+Each instance of the Featured Content Widget will need to be re-saved after upgrading due to the addition of a new database option.
+
 = 1.0.0 =
 All current widgets will need to be repopulated with featured content due to structural changes to the core of the plugin that break backwards compatibility with versions <= 0.8.4.
 
@@ -60,6 +63,13 @@ There is not currently a FAQ available for this plugin. I'm workin' on it though
 2. Front End
 
 == Changelog ==
+
+= 1.0.1 =
+* improved code to work better with 3rd party plugins (Domain Mapping)
+* added the ability to choose the widget title's HTML element
+* adjusted layout of some admin input elements
+* added some more default styles
+* updated HTML output in content type views 
 
 = 1.0.0 =
 * separated plugin responsibilities into MVC-like structure
