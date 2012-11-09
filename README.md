@@ -25,6 +25,13 @@ The interactive features of the widget's admin interface come from a combination
 
 ## Changelog
 
+### 1.0.1
+* improved code to work better with 3rd party plugins (Domain Mapping)
+* added the ability to choose the widget title's HTML element
+* adjusted layout of some admin input elements
+* added some more default styles
+* updated HTML output in content type views
+
 ### 1.0.0
 * separated plugin responsibilities into MVC-like structure
 * rewrote readme files
