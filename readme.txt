@@ -23,7 +23,7 @@ The crop length (in characters) of the description can be controlled via the plu
 
 The widget that's displayed to the user on the front of the site provides a link after the description to allow the visitor to view the remainder of the featured content in its full glory. The link text defaults to "Read More...", but can be customized through the **Read More Label** field.
 
-Because many site admins do not have access to how a theme styles the HTML output of the widgets added to a sidebar, the admin section allows you to choose what heading element will be used to wrap the widget's title. You can choose from an <h1> all the way down to an <h6>. This allows you to add the widget to any number of sidebars (or widgetized areas) in a theme that has defined different looks between different page sections.
+Because many site admins do not have access to how a theme styles the HTML output of the widgets added to a sidebar, the admin section allows you to choose what heading element will be used to wrap the widget's title. You can choose from an &lt;h1&gt; all the way down to an &lt;h6&gt;. This allows you to add the widget to any number of sidebars (or widgetized areas) in a theme that has defined different looks between different page sections.
 
 You have almost complete control over the plugin's image handling capabilities. The **Display Images** checkbox toggles the displaying of all images. When images are displayed they will be chosen based on the type of featured content, unless you enter a URL to a specific image in the **Image URL** field. For groups, the image is the group’s avatar; for members their personal avatar is used; for a blog the author’s avatar is used; and for posts the image used is either the first image within the post or the avatar of the post's author. The resource type will use the URL from the **Image URL** field to load an image from an external source. The size of the thumbnail displayed in the widget can be controlled through the **Image Width** and **Image Height** fields, which are both set to 50px by default.
 
@@ -65,6 +65,9 @@ There is not currently a FAQ available for this plugin. I'm workin' on it though
 2. Front End
 
 == Changelog ==
+
+= 1.0.2 =
+* fixed small readme error
 
 = 1.0.1 =
 * improved code to work better with 3rd party plugins (Domain Mapping)
