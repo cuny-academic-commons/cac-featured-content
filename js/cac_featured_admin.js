@@ -110,7 +110,8 @@ var cacFeaturedContent = {
 
   // this function runs when the content type select box changes
   typeChange: function($widget) {
-    contentType = $widget.find(':selected').val();
+
+    contentType = $widget.find('.featured_select').val();
 
     // start by hiding all inputs
     cacFeaturedContent.hideAll($widget);

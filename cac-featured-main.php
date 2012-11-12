@@ -117,11 +117,29 @@ class CAC_Featured_Content_Widget extends WP_Widget {
           'type'    => 'text',
           'default' => 'Featured'
         ),
+        // title HTML element
+        array(
+          'name'    => __( 'Widget Title Element', 'cac-featured-content' ),
+          'desc'    => '',
+          'id'      => 'title_element',
+          'class'   => 'alignright',
+          'type'    => 'select',
+          'default' => 'h3',
+          'options' => array(
+            'h1' => 'h1',
+            'h2' => 'h2',
+            'h3' => 'h3',
+            'h4' => 'h4',
+            'h5' => 'h5',
+            'h6' => 'h6'
+          )
+        ),
         // type of featured content
         array(
           'name'    => __( 'Featured Content Type', 'cac-featured-content' ),
           'desc'    => '',
           'id'      => 'featured_content_type',
+          'class'   => 'featured_select alignright',
           'type'    => 'select',
           'options' => array(
             'group'    => __( 'Group', 'cac-featured-content' ),
@@ -133,7 +151,7 @@ class CAC_Featured_Content_Widget extends WP_Widget {
         // featured post
         array(
           'name' => __( 'Enter featured post name', 'cac-featured-content' ),
-          'desc' => __( 'You must enter a blog address first <br /> no http:// required', 'cac-featured-content' ),
+          'desc' => __( 'no http:// required', 'cac-featured-content' ),
           'id'   => 'featured_post',
           'type' => 'text',
           'class' => 'featured_post featured_post_ac autocomplete'
@@ -234,15 +252,15 @@ class CAC_Featured_Content_Widget extends WP_Widget {
     // add support for featured blogs in the admin here, only if MS is enabled
     if ( is_multisite() ) {
       // add the 'blog' content type
-      $this->widget['fields'][1]['options']['blog'] = __( 'Blog', 'cac-featured-content' );
+      $this->widget['fields'][2]['options']['blog'] = __( 'Blog', 'cac-featured-content' );
       
       // tweak the post input field description
-      $this->widget['fields'][2]['desc'] = __( 'You must enter a blog address first <br /> no http:// required', 'cac-featured-content' );
+      $this->widget['fields'][3]['desc'] = __( 'You must enter a blog address first <br /> no http:// required', 'cac-featured-content' );
 
       // add the featured_blog text input field
       // because of the way the form() method builds the admin interface we need the
       // blog text input field to be in a specific position, so we use array_splice()
-      array_splice( $this->widget['fields'], 2, 0 , array(
+      array_splice( $this->widget['fields'], 3, 0 , array(
         array(
           'name' => __( 'Enter featured blog address', 'cac-featured-content' ),
           'desc' => __( 'no http:// required', 'cac-featured-content' ),

@@ -46,7 +46,17 @@ class CAC_Featured_Content_Helper {
 				}
 			}
 		}
+
 		$blog_data = get_blog_details($blog_id);
+
+	  // update the blog domain on MS installs
+	  // this makes domain mapping plugin work
+	  if ( is_multisite() ) {
+	  	switch_to_blog( $blog_data->blog_id );
+	  	$blog_data->siteurl = home_url('/');
+	  	restore_current_blog();
+	  }
+
 		return $blog_data;
 	}
 
@@ -80,6 +90,11 @@ class CAC_Featured_Content_Helper {
 				}
 			endwhile;
 		endif;
+
+	  // update the post guid on MS installs
+	  // this makes domain mapping plugin work
+	  if ( is_multisite() )
+	    $single_post->guid = get_blog_permalink( $blog_id, $single_post->ID );
 
 		return $single_post;
 	}
