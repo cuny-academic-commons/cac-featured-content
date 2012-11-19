@@ -145,7 +145,7 @@ class CAC_Posts_Autocomplete {
 	function handler( $value = '' ) {
 
 		$cfcw_fields = get_option( 'widget_cac_featured_content_widget' );
-		$num = key( $cfcw_fields );
+		$num = urldecode( $_REQUEST['num'] );
 		$retval = array();
 
 		if ( empty( $value ) )
@@ -164,7 +164,7 @@ class CAC_Posts_Autocomplete {
 					
 					switch_to_blog( $blog->blog_id );
 
-					$query = new WP_Query("s={$q}&post_status=publish");
+					$query = new WP_Query("s={$q}&post_type=post&post_status=publish");
 
 					foreach ($query->posts as $post) {
 						$retval[] = array(
@@ -185,7 +185,7 @@ class CAC_Posts_Autocomplete {
 
 			} else {
 				// we must not be running MS so we'll just list the site's blog posts
-				$query = new WP_Query("s={$q}&post_status=publish");
+				$query = new WP_Query("s={$q}&post_type=post&post_status=publish");
 				
 				foreach ($query->posts as $post) {
 					$retval[] = array(

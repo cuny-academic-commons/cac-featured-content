@@ -52,9 +52,11 @@ class CAC_Featured_Content_Helper {
 	  // update the blog domain on MS installs
 	  // this makes domain mapping plugin work
 	  if ( is_multisite() ) {
-	  	switch_to_blog( $blog_data->blog_id );
-	  	$blog_data->siteurl = home_url('/');
-	  	restore_current_blog();
+	  	if ( $blog_data ) {
+		  	switch_to_blog( $blog_data->blog_id );
+		  	$blog_data->siteurl = home_url('/');
+		  	restore_current_blog();
+	  	}
 	  }
 
 		return $blog_data;
