@@ -5,7 +5,7 @@ Plugin URI: https://github.com/cuny-academic-commons/cac-featured-content
 Tags: buddypress, multisite, feature, featured, highlight
 Requires at least: 3.3
 Tested up to: 3.4.2
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,6 +38,9 @@ Additional technical details can be found in the plugin's README on [Github](htt
 
 == Upgrade Notice ==
 
+= 1.0.3 =
+Each instance of the Featured Content Widget will need to be re-saved after upgrading due to the addition of a new database option.
+
 = 1.0.2 =
 Each instance of the Featured Content Widget will need to be re-saved after upgrading due to the addition of a new database option.
 
@@ -68,6 +71,9 @@ There is not currently a FAQ available for this plugin. I'm workin' on it though
 2. Front End
 
 == Changelog ==
+
+= 1.0.3 =
+* fixed js error that was improperly referencing widget number on new widgets
 
 = 1.0.2 =
 * fixed small readme error
