@@ -147,7 +147,14 @@ var cacFeaturedContent = {
 
   // this function initializes autocomplete for a given content type
   initAutocomplete: function($widget, type) {
-    var num = $widget.find('[name="widget_number"]').val();
+    // widget numbers are weird when you first drop a new widget in the admin
+    // so we have to use a different attr when a widget is first created
+    if ($widget.find('[name="multi_number"]').val()) {
+      var num = $widget.find('[name="multi_number"]').val();
+    } else {
+      var num = $widget.find('[name="widget_number"]').val();
+    }
+    
     $widget.find('input.featured_' + type + '_ac').autocomplete({
       source: ajaxurl + '?action=cfcw_query_' + type + '&num=' + num,
     });
