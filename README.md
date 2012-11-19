@@ -29,6 +29,9 @@ The interactive features of the widget's admin interface come from a combination
 
 ### 1.0.2
 * fixed small readme error
+* updated javascript to support new features
+* improved multi-widget support
+* fixed an autocomplete bug
 
 ### 1.0.1
 * improved code to work better with 3rd party plugins (Domain Mapping)
