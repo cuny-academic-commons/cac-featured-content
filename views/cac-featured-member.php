@@ -10,7 +10,7 @@
 ?>
 
 <?php // echo out the widget title using the element selected in the widget admin
-  echo "<{$cfcw_view->title_element} class='widgettitle'>";
+  echo "<{$cfcw_view->title_element} class='widget-title'>";
   esc_html_e( $cfcw_view->title );
   echo "</{$cfcw_view->title_element}>";
 ?>
