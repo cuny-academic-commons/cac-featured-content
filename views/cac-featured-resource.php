@@ -1,7 +1,7 @@
 <?php
 /**
- * This file is responsible for displaying a featured blog on the front end of 
- * the site. It is required by the core view template whenever the 
+ * This file is responsible for displaying a featured blog on the front end of
+ * the site. It is required by the core view template whenever the
  * featured content type has been set to 'blog'
  *
  * @author Dominic Giglio
@@ -26,6 +26,6 @@
   <p class="cfcw-title">
     <a href="<?php echo esc_url( $cfcw_view->resource_link ) ?>"><?php esc_html_e( $cfcw_view->resource_title ) ?></a>
   </p>
-  
+
   <p><?php echo bp_create_excerpt( $cfcw_view->description, $cfcw_view->crop_length ) ?></p>
 </div>

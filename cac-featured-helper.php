@@ -169,7 +169,7 @@ class CAC_Featured_Content_Helper {
 
 	/**
 	 * Widget Error
-	 * 
+	 *
 	 * This function can be used to render an error message on the front end of your site.
 	 * It matches the HTML structure of the rest of the widget views.
 	 *
@@ -184,7 +184,7 @@ class CAC_Featured_Content_Helper {
       	<p><?php echo $msg ?></p>
         <p><?php _e( 'Please correct and reload.', 'cac-featured-content' ) ?></p>
       </div>
-		<?php 
+		<?php
 	}
 
 } // end CAC_Featured_Content_Helper class

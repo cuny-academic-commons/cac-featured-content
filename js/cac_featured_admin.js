@@ -88,7 +88,7 @@ var cacFeaturedContent = {
 
     // initialize all widgets except the dummy widget (we did that when the page loaded)
     $widgets.each(function() {
-      
+
       // cache some variables to make scripting easier
       var $currentWidget = jQuery(this);
       var widgetID = $currentWidget.find('input[name="widget-id"]').val();
@@ -104,7 +104,7 @@ var cacFeaturedContent = {
       }
 
     });
-  
+
   },
 
   // this function runs when the content type select box changes
@@ -154,7 +154,7 @@ var cacFeaturedContent = {
     } else {
       var num = $widget.find('[name="widget_number"]').val();
     }
-    
+
     $widget.find('input.featured_' + type + '_ac').autocomplete({
       source: ajaxurl + '?action=cfcw_query_' + type + '&num=' + num,
     });

@@ -1,7 +1,7 @@
 <?php
 /**
- * This file is responsible for displaying a featured member on the front end of 
- * the site. It is required by the core view template whenever the 
+ * This file is responsible for displaying a featured member on the front end of
+ * the site. It is required by the core view template whenever the
  * featured content type has been set to 'member'
  *
  * @author Dominic Giglio
@@ -24,9 +24,9 @@
         echo $cfcw_view->avatar;
     }
   ?>
-  
+
   <p class="cfcw-title"><?php echo $cfcw_view->member->user_link ?></p>
-  
+
   <p class="item-meta"><span class="activity"><?php esc_html_e( $cfcw_view->member->last_activity ) ?></span></p>
 
   <?php if ( $cfcw_view->read_more ) : ?>
