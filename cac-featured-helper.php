@@ -26,9 +26,9 @@ class CAC_Featured_Content_Helper {
 			);
 		} else {
 			// Gotta be funky here
-			$blogs = $wpdb->get_results( $wpdb->prepare(
+			$blogs = $wpdb->get_results(
 				"SELECT blog_id, path FROM $wpdb->blogs
-        			WHERE path LIKE '%%" . like_escape( $domain ) . "%%'" )
+				WHERE path LIKE '%%" . like_escape( $domain ) . "%%'"
         		);
 
 			// If there's just one, it's the one. Otherwise go fish
