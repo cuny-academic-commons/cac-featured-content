@@ -43,15 +43,11 @@ class CAC_Featured_Content_Helper {
 
 		$blog_data = get_blog_details($blog_id);
 
-	  // update the blog domain on MS installs
-	  // this makes domain mapping plugin work
-	  if ( is_multisite() ) {
-	  	if ( $blog_data ) {
-		  	switch_to_blog( $blog_data->blog_id );
-		  	$blog_data->siteurl = home_url('/');
-		  	restore_current_blog();
-	  	}
-	  }
+		// update the blog domain on MS installs
+		// this makes domain mapping plugin work
+		if ( is_multisite() && $blog_data ) {
+			$blog_data->siteurl = get_home_url( $blog_id, '/' );
+		}
 
 		return $blog_data;
 	}
