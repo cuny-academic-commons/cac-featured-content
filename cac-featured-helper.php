@@ -60,8 +60,6 @@ class CAC_Featured_Content_Helper {
 	 * @return object
 	 */
 	public static function get_post_by_slug( $slug, $blog_id = '' ) {
-		global $post;
-
 		$single_post = false;
 
 		// setup $posts var
