@@ -13,38 +13,32 @@ class CAC_Featured_Content_Helper {
 	 * Somewhat surprisingly, this function doesn't (or at least, this
 	 * functionality) doesn't seem to exist in the core.
 	 *
-	 * @param string $domain - The domain of the blog you're looking for info on
+	 * @param string $domain - The URL of the blog you're looking for info on
 	 * @return object - An object containing information about the blog.
 	 */
 	public static function get_blog_by_domain($domain) {
 		global $wpdb;
 
+		// if no scheme, add one
+		if ( false === strpos( $domain, '://' ) ) {
+			$domain = "http://{$domain}";
+		}
+
+		// parse the URL
+		$url_parts = parse_url( trailingslashit( $domain ) );
+
 		if ( is_subdomain_install() ) {
 			$blog_id = $wpdb->get_var( $wpdb->prepare(
 				"SELECT blog_id FROM $wpdb->blogs
-				WHERE domain = %s", $domain )
+				WHERE domain = %s", $url_parts['host'] )
 			);
-		} else {
-			// Gotta be funky here
-			$blogs = $wpdb->get_results(
-				"SELECT blog_id, path FROM $wpdb->blogs
-				WHERE path LIKE '%%" . like_escape( $domain ) . "%%'"
-        		);
 
-			// If there's just one, it's the one. Otherwise go fish
-			if ( count( $blogs ) == 1 ) {
-				$blog_id = $blogs[0]->blog_id;
-			} else {
-				// Gotta do it this way bc of installs that are themselves inside subdomains
-				foreach( $blogs as $blog ) {
-					$path_a = explode( '/', $blog->path );
-					$last_path = array_pop( $path_a );
-					if ( $blog->path == $domain || $last_path == $domain ) {
-						$blog_id = $blog->blog_id;
-						break;
-					}
-				}
-			}
+		// subdirectory install
+		} else {
+			$blog_id = $wpdb->get_var(
+				"SELECT blog_id FROM $wpdb->blogs
+				WHERE path = '{$url_parts['path']}'"
+        		);
 		}
 
 		$blog_data = get_blog_details($blog_id);
