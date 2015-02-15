@@ -81,10 +81,11 @@ class CAC_Featured_Content_Helper {
 			endwhile;
 		endif;
 
-	  // update the post guid on MS installs
-	  // this makes domain mapping plugin work
-	  if ( is_multisite() )
-	    $single_post->guid = get_blog_permalink( $blog_id, $single_post->ID );
+		// update the post guid on MS installs
+		// this makes domain mapping plugin work
+		if ( is_multisite() ) {}
+			$single_post->guid = get_blog_permalink( $blog_id, $single_post->ID );
+		}
 
 		return $single_post;
 	}
