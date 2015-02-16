@@ -83,7 +83,7 @@ class CAC_Featured_Content_Helper {
 
 		// update the post guid on MS installs
 		// this makes domain mapping plugin work
-		if ( is_multisite() ) {}
+		if ( is_multisite() ) {
 			$single_post->guid = get_blog_permalink( $blog_id, $single_post->ID );
 		}
 
@@ -150,7 +150,7 @@ class CAC_Featured_Content_Helper {
 				  '" class="align-left thumbnail" />';
 			}
 		} else {
-      $content = false;
+			$content = false;
 		}
 
 		return $content;
@@ -158,7 +158,7 @@ class CAC_Featured_Content_Helper {
 
 	/**
 	 * Widget Error
-	 * 
+	 *
 	 * This function can be used to render an error message on the front end of your site.
 	 * It matches the HTML structure of the rest of the widget views.
 	 *
@@ -167,13 +167,15 @@ class CAC_Featured_Content_Helper {
 	 * @param array $sidebar
 	 */
 	public static function error( $msg = '' ) {
-		?>
-		  <h3><?php _e( 'Error', 'cac-featured-content' ) ?></h3>
-      <div class="cfcw-content">
-      	<p><?php echo $msg ?></p>
-        <p><?php _e( 'Please correct and reload.', 'cac-featured-content' ) ?></p>
-      </div>
-		<?php 
+	?>
+
+		<h3><?php _e( 'Error', 'cac-featured-content' ) ?></h3>
+		<div class="cfcw-content">
+			<p><?php echo $msg ?></p>
+			<p><?php _e( 'Please correct and reload.', 'cac-featured-content' ) ?></p>
+		</div>
+
+	<?php
 	}
 
 } // end CAC_Featured_Content_Helper class
@@ -191,15 +193,18 @@ if ( ! function_exists( 'get_user_id_from_string' ) ) {
 		$user_id = 0;
 
 		if ( is_email( $string ) ) {
-			$user = get_user_by('email', $string);
-			if ( $user )
+			$user = get_user_by( 'email', $string );
+			if ( $user ) {
 				$user_id = $user->ID;
-		} elseif ( is_numeric( $string ) ) {
-			$user_id = $string;
-		} else {
-			$user = get_user_by('login', $string);
-			if ( $user )
-				$user_id = $user->ID;
+			} elseif ( is_numeric( $string ) ) {
+				$user_id = $string;
+			} else {
+				$user = get_user_by( 'login', $string );
+				if ( $user ) {
+					$user_id = $user->ID;
+				}
+			}
+
 		}
 
 		return $user_id;
