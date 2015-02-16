@@ -74,8 +74,8 @@ class CAC_Featured_Content_Helper {
 		if ( $posts->have_posts() ) :
 			while ( $posts->have_posts() ) :
 				$posts->the_post();
-				if ( $post->post_name == $slug ) {
-					$single_post = $post;
+				if ( $posts->post->post_name == $slug ) {
+					$single_post = $posts->post;
 					break;
 				}
 			endwhile;
