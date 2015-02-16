@@ -28,20 +28,14 @@ class CAC_Featured_Content_Helper {
 		$url_parts = parse_url( trailingslashit( $domain ) );
 
 		if ( is_subdomain_install() ) {
-			$blog_id = $wpdb->get_var( $wpdb->prepare(
-				"SELECT blog_id FROM $wpdb->blogs
-				WHERE domain = %s", $url_parts['host'] )
-			);
+			$blog_id = get_blog_id_from_url( $url_parts['host'] );
 
 		// subdirectory install
 		} else {
-			$blog_id = $wpdb->get_var(
-				"SELECT blog_id FROM $wpdb->blogs
-				WHERE path = '{$url_parts['path']}'"
-        		);
+			$blog_id = get_blog_id_from_url( $url_parts['host'], $url_parts['path'] );
 		}
 
-		$blog_data = get_blog_details($blog_id);
+		$blog_data = get_blog_details( $blog_id );
 
 		// update the blog domain on MS installs
 		// this makes domain mapping plugin work
