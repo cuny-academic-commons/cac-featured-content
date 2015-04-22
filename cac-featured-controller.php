@@ -58,7 +58,7 @@ if ( $cfcw_view->content_type == 'blog' ) {
     // if we still don't have an image, get an avatar
     if ( ! $cfcw_view->image_url ) {
       $cfcw_view->avatar = bp_core_fetch_avatar( array(
-        'item_id' => get_user_id_from_string( get_blog_option( $cfcw_view->blog->blog_id, 'admin_email' ) ),
+        'item_id' => cacfc_get_user_id_from_string( get_blog_option( $cfcw_view->blog->blog_id, 'admin_email' ) ),
         'width'   => $cfcw_view->image_width,
         'height'  => $cfcw_view->image_height,
         'type'    => 'full',
@@ -153,7 +153,7 @@ if ( $cfcw_view->content_type == 'post' ) {
 
 // member specific view template variables
 if ( $cfcw_view->content_type == 'member' ) {
-  $cfcw_view->member = bp_core_get_core_userdata( get_user_id_from_string( $params['featured_member'] ) );
+  $cfcw_view->member = bp_core_get_core_userdata( cacfc_get_user_id_from_string( $params['featured_member'] ) );
 
   // if we don't have a valid member bail now
   if ( ! $cfcw_view->member ) {

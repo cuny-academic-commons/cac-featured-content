@@ -176,33 +176,22 @@ class CAC_Featured_Content_Helper {
 
 /**
  * Get a numeric user ID from either an email address or a login.
- * This function has been copied from ms-functions.php to provide
- * the same functionality when not running mulitsite
  *
  * @param string $string
  * @return int
  */
-if ( ! function_exists( 'get_user_id_from_string' ) ) {
-	function get_user_id_from_string( $string ) {
-		$user_id = 0;
+function cacfc_get_user_id_from_string( $string ) {
+	$user_id = 0;
 
-		if ( is_email( $string ) ) {
-			$user = get_user_by( 'email', $string );
-			if ( $user ) {
-				$user_id = $user->ID;
-			} elseif ( is_numeric( $string ) ) {
-				$user_id = $string;
-			} else {
-				$user = get_user_by( 'login', $string );
-				if ( $user ) {
-					$user_id = $user->ID;
-				}
-			}
-
-		}
-
-		return $user_id;
+	if ( is_email( $string ) ) {
+		$user = get_user_by( 'email', $string );
+	} else {
+		$user = get_user_by( 'login', $string );
 	}
-}
 
-?>
+	if ( $user ) {
+		$user_id = $user->ID;
+	}
+
+	return $user_id;
+}
