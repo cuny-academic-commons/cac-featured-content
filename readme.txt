@@ -38,6 +38,9 @@ Additional technical details can be found in the plugin's README on [Github](htt
 
 == Upgrade Notice ==
 
+= 1.0.6 =
+* Content-type specific templates can now be overridden from a theme directory called 'cac-featured-content'.
+
 = 1.0.3 =
 Each instance of the Featured Content Widget will need to be re-saved after upgrading due to the addition of a new database option.
 
