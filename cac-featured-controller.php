@@ -190,7 +190,10 @@ if ( $cfcw_view->content_type == 'resource' ) {
   $cfcw_view->resource_link  = $params['featured_resource_link'];
 }
 
-// load the appropriate view file
-require dirname( __FILE__ ) . DS . 'views' . DS . "cac-featured-{$cfcw_view->content_type}.php";
+// Load the appropriate view file. We allow the file to be loaded from a theme, to override default markup.
+$template_file = "cac-featured-{$cfcw_view->content_type}.php";
+if ( ! $template = locate_template( 'cac-featured-content/' . $template_file ) ) {
+	$template = dirname( __FILE__ ) . '/views/' . $template_file;
+}
 
-?>
+require $template;
