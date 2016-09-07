@@ -51,11 +51,12 @@ class CAC_Groups_Autocomplete {
 
 	// filters the bp_has_groups query to do a proper LIKE
 	function filter_group_sql( $sql ) {
-		global $bp;
+		global $bp, $wpdb;
 
 		$sqla = explode( 'WHERE', $sql );
 
-		$new_sql = $sqla[0] . ' WHERE g.name LIKE "%' . $this->search_terms . '%" AND ' . $sqla[1];
+		$s = '%' . $wpdb->esc_like( $this->search_terms ) . '%';
+		$new_sql = $wpdb->prepare( $sqla[0] . " WHERE g.name LIKE %s AND " . $sqla[1], $s );
 
 		return $new_sql;
 	}
@@ -111,15 +112,17 @@ class CAC_Blogs_Autocomplete {
 		else
 			$q = $value;
 
+		$s = '%' . $wpdb->esc_like( $q ) . '%';
+
 		if ( $q ) {
-			$blogs = $wpdb->get_results("
+			$blogs = $wpdb->get_results( $wpdb->prepare( "
         SELECT domain
         FROM {$wpdb->blogs}
-        WHERE domain like '%{$q}%'
+        WHERE domain like %s
         AND spam = '0'
         AND deleted = '0'
         AND archived = '0'
-        AND blog_id != 1");
+        AND blog_id != 1", $s ) );
 
 			foreach ( $blogs as $blog ) {
 				$retval[] = array(
