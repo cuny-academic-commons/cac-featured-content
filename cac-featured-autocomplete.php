@@ -115,10 +115,12 @@ class CAC_Blogs_Autocomplete {
 		$s = '%' . $wpdb->esc_like( $q ) . '%';
 
 		if ( $q ) {
+			$field = function_exists( 'is_subdomain_install' ) && is_subdomain_install() ? 'domain' : 'path';
+
 			$blogs = $wpdb->get_results( $wpdb->prepare( "
-        SELECT domain
+        SELECT domain, path
         FROM {$wpdb->blogs}
-        WHERE domain like %s
+        WHERE {$field} like %s
         AND spam = '0'
         AND deleted = '0'
         AND archived = '0'
@@ -126,8 +128,8 @@ class CAC_Blogs_Autocomplete {
 
 			foreach ( $blogs as $blog ) {
 				$retval[] = array(
-					'label' => $blog->domain,
-					'value' => $blog->domain
+					'label' => $blog->domain . $blog->path,
+					'value' => $blog->domain . $blog->path,
 				);
 			}
 		}
