@@ -164,7 +164,7 @@ class CAC_Posts_Autocomplete {
 
 				// only return results if we have a valid blog
 				if ($blog) {
-					
+
 					switch_to_blog( $blog->blog_id );
 
 					$query = new WP_Query("s={$q}&post_type=post&post_status=publish");
@@ -189,7 +189,7 @@ class CAC_Posts_Autocomplete {
 			} else {
 				// we must not be running MS so we'll just list the site's blog posts
 				$query = new WP_Query("s={$q}&post_type=post&post_status=publish");
-				
+
 				foreach ($query->posts as $post) {
 					$retval[] = array(
 						'label' => $post->post_title,
@@ -197,7 +197,7 @@ class CAC_Posts_Autocomplete {
 					);
 				}
 			}
-			
+
 		}
 
 		die( json_encode( $retval ) );
