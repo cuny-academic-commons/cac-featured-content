@@ -5,7 +5,7 @@ Plugin URI: https://github.com/cuny-academic-commons/cac-featured-content
 Tags: buddypress, multisite, feature, featured, highlight
 Requires at least: 3.3
 Tested up to: 4.9
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,9 @@ Additional technical details can be found in the plugin's README on [Github](htt
 4. Enjoy all the positive feedback your site now receives
 
 == Upgrade Notice ==
+
+= 1.0.9 =
+* Fix regression in 1.0.8.
 
 = 1.0.8 =
 * Improved compatibility with PHP 7.2.
