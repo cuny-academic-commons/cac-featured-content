@@ -23,7 +23,7 @@ defined( 'DS' ) or define( 'DS', DIRECTORY_SEPARATOR );
  */
 add_action( 'admin_print_scripts-widgets.php', 'cac_featured_admin_js' );
 add_action( 'admin_init', 'cac_featured_admin_init' );
-add_action( 'widgets_init', 'CAC_Featured_Content_Widget' );
+add_action( 'widgets_init', 'cac_featured_register_widget' );
 
 function cac_featured_register_widget() {
 	register_widget( 'CAC_Featured_Content_Widget' );
